@@ -33,6 +33,9 @@ int BinarySearch(const std::vector<T>& Indata, T TargetNum)
 		return -1;
 }
 
+//1.1.13 solution
+void TransposeTwoArray(int* IndataPtr, size_t width, size_t height);
+
 
 //≤‚ ‘
 void test();
@@ -40,4 +43,6 @@ void test();
 void testGcd();
 
 void testBinarySearch();
+
+void testTransposeTwoArray();
 

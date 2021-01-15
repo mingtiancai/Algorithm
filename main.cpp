@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "chapter1/chapter1.h"
+#include <bitset>
 
 using namespace std;
 
@@ -10,8 +11,11 @@ int main()
 {
 	cout << "begin\n";
 	test();
+	
 
+	
 
+			
 
 
 

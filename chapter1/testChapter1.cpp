@@ -31,11 +31,41 @@ void testBinarySearch()
 	cout << BinarySearch<int>(testData3, target) << endl;
 }
 
+void testTransposeTwoArray()
+{
+	/*int dataArray[3][4]= { 1,2,3,4,5,6,7,8,9,10,11,12 };*/
+
+	int dataArray[3][1] = { 1,2,3 };
+
+	const int oldWidth = 3;
+	const int oldHeight = 1;
+	const int newWidth = 1;
+	const int newHeight = 3;
+
+	//打印原来数组
+	for (int i = 0; i < oldHeight; i++)
+	{
+		for (int j = 0; j < oldWidth; j++)
+			cout << "   " << dataArray[i][j];
+		cout << endl;
+	}
+
+	TransposeTwoArray((int*)dataArray, oldWidth, oldHeight);
+
+	for (int i = 0; i < newHeight; i++)
+	{
+		for (int j = 0; j < newWidth; j++)
+			cout << "   " << *((int*)dataArray + i * newWidth + j);
+		cout << endl;
+	}
+}
+
 
 
 void test()
 {
 	//testGcd();
 	//testBinarySearch();
+	testTransposeTwoArray();
 
 }
