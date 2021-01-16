@@ -1,7 +1,7 @@
 #include "chapter1.h"
 #include <assert.h>
 #include <iostream>
-#include <bitset>
+#include <cmath>
 
 
 using namespace std;
@@ -113,5 +113,13 @@ unsigned int LessMaxIntegerLog2(unsigned int N)
 		return tmpIndex;
 	else
 		return minIndex;
+}
+
+double RecurveComputeIn(unsigned int N)
+{
+	if (N == 1)
+		return 0;
+	else
+		return log(N) + RecurveComputeIn(N - 1);
 }
 

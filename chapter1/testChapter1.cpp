@@ -80,6 +80,11 @@ void testLessMaxIntegerLog2()
 	cout << LessMaxIntegerLog2(22) << endl;
 }
 
+void testRecurveComputeIn()
+{
+	cout << RecurveComputeIn(5) << endl;
+}
+
 
 void test()
 {
@@ -87,5 +92,6 @@ void test()
 	//testBinarySearch();
 	//testTransposeTwoArray();
 	//testComputePowBase2();
-	testLessMaxIntegerLog2();
+	//testLessMaxIntegerLog2();
+	//testRecurveComputeIn();
 }

@@ -45,6 +45,9 @@ void TransposeTwoArray(int* IndataPtr, size_t width, size_t height);
 //1.1.14 solution
 unsigned int LessMaxIntegerLog2(unsigned int N);
 
+//1.1.20
+double RecurveComputeIn(unsigned int N);
+
 
 //≤‚ ‘
 void test();
@@ -58,4 +61,6 @@ void testTransposeTwoArray();
 void testComputePowBase2();
 
 void testLessMaxIntegerLog2();
+
+void testRecurveComputeIn();
 
