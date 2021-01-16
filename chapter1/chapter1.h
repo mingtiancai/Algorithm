@@ -33,8 +33,17 @@ int BinarySearch(const std::vector<T>& Indata, T TargetNum)
 		return -1;
 }
 
+//¹¤¾ßº¯Êý
+unsigned int ComputePowBase2(unsigned int exponent);
+
+
+
+
 //1.1.13 solution
 void TransposeTwoArray(int* IndataPtr, size_t width, size_t height);
+
+//1.1.14 solution
+unsigned int LessMaxIntegerLog2(unsigned int N);
 
 
 //²âÊÔ
@@ -45,4 +54,8 @@ void testGcd();
 void testBinarySearch();
 
 void testTransposeTwoArray();
+
+void testComputePowBase2();
+
+void testLessMaxIntegerLog2();
 

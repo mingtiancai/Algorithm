@@ -60,12 +60,32 @@ void testTransposeTwoArray()
 	}
 }
 
+void testComputePowBase2()
+{
+	cout << ComputePowBase2(0) << endl;
+	cout << ComputePowBase2(1) << endl;
+	cout << ComputePowBase2(10) << endl;
+}
+
+void testLessMaxIntegerLog2()
+{
+	cout << LessMaxIntegerLog2(8) << endl;
+	cout << LessMaxIntegerLog2(9) << endl;
+	cout << LessMaxIntegerLog2(1) << endl;  
+	cout << LessMaxIntegerLog2(4) << endl;
+	cout << LessMaxIntegerLog2(5) << endl;
+	cout << LessMaxIntegerLog2(12) << endl;
+	cout << LessMaxIntegerLog2(16) << endl;
+	cout << LessMaxIntegerLog2(17) << endl;
+	cout << LessMaxIntegerLog2(22) << endl;
+}
 
 
 void test()
 {
 	//testGcd();
 	//testBinarySearch();
-	testTransposeTwoArray();
-
+	//testTransposeTwoArray();
+	//testComputePowBase2();
+	testLessMaxIntegerLog2();
 }

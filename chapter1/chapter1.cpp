@@ -53,3 +53,65 @@ void TransposeTwoArray(int* IndataPtr, size_t width, size_t height)
 	delete []flagPtrIn;    //回收动态数组
 }
 
+unsigned int ComputePowBase2(unsigned int exponent)
+{
+	unsigned int result = 1;
+
+	if (exponent == 0)
+	{
+		result = 1;
+		return result;
+	}
+	else
+	{
+		for (unsigned int i = 0; i < exponent; i++)
+			result = result * 2;
+		return result;
+	}
+}
+
+
+
+unsigned int LessMaxIntegerLog2(unsigned int N)
+{
+	assert(N > 0);
+
+	vector<int> Indata;
+	for (int i = 0; i < N+1; i++)
+		Indata.push_back(i);
+
+	size_t minIndex = 0;
+	size_t maxIndex = Indata.size() - 1;
+	size_t index = (minIndex + maxIndex) / 2;
+
+	size_t tmpIndex = 0;
+	unsigned int tmpValue = 1;
+
+	while (minIndex != maxIndex-1)
+	{
+		if (ComputePowBase2(Indata[index]) <= N)
+		{
+			tmpIndex = index;
+			tmpValue = ComputePowBase2(Indata[index]);
+			minIndex = index + 1;
+		}
+		else
+		{
+			if (index == minIndex + 1)
+				break;
+			else
+				maxIndex = index - 1;
+		}
+		index = (minIndex + maxIndex) / 2;
+	}
+
+	unsigned int currentMinIndexValue = ComputePowBase2(Indata[minIndex]);
+	unsigned int currentMaxIndexValue = ComputePowBase2(Indata[maxIndex]);
+	if (currentMaxIndexValue <= N)
+		return maxIndex;
+	else if (tmpValue <= N && currentMinIndexValue > N)
+		return tmpIndex;
+	else
+		return minIndex;
+}
+
