@@ -1,6 +1,5 @@
 #include "chapter1.h"
-#include <vector>
-#include <iostream>
+
 
 using namespace std;
 
@@ -114,6 +113,20 @@ void testComprimeArrayIndex()
 	}
 }
 
+void testStringParseToDouble()
+{
+	string s = "100.23";
+	//string s = "0.23";
+	vector<string> p;
+	for (int i = 0; i < s.size(); i++)
+		p.push_back(string(1,s[i]));
+	double r;
+	r = StringParseToDouble(p);
+	cout << r << endl;
+}
+
+
+
 
 
 
@@ -127,5 +140,8 @@ void test()
 	//testLessMaxIntegerLog2();
 	//testRecurveComputeIn();
 	//testEqualKey();
-	testComprimeArrayIndex();
+	//testComprimeArrayIndex();
+	testStringParseToDouble();
+
+
 }
