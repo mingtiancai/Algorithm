@@ -1,9 +1,16 @@
-#include <vector>
-#include <assert.h>
-#include <utility>
+#include "../base.h"
 
 //工具函数
 unsigned int ComputePowBase2(unsigned int exponent);
+
+double StringParseToDouble(std::vector<std::string> InString);
+
+class OperatorSet {
+public:
+	OperatorSet();
+private:
+
+};
 
 //算法
 
@@ -113,6 +120,8 @@ std::pair<int, int> EqualKey(const std::vector<T>& Indata, T TargetNum)
 //1.1.30
 void ComprimeArrayIndex(bool* Indata,size_t Width,size_t Height);
 
+double ComputeArithmeticExpression(std::string ArithmeticExpression);
+
 
 
 
@@ -132,4 +141,6 @@ void testLessMaxIntegerLog2();
 void testRecurveComputeIn();
 
 void testEqualKey();
+
+void testStringParseToDouble();
 

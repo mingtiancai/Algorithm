@@ -1,7 +1,5 @@
 #include "chapter1.h"
-#include <assert.h>
-#include <iostream>
-#include <cmath>
+
 
 
 using namespace std;
@@ -135,4 +133,122 @@ void ComprimeArrayIndex(bool* Indata, size_t Width, size_t Height)
 				*(Indata + i * Width + j) = false;
 		}
 	}
+}
+
+double StringParseToDouble(std::vector<string> InString)
+{
+	bool flagPoint = false;
+	size_t indexPoint;
+	double result=0;
+
+	for (int i=0;i<InString.size();i++)
+	{
+		if (InString[i] == ".")
+		{
+			flagPoint = true;
+			indexPoint = i;
+		}
+	}
+
+	if (!flagPoint)
+	{
+		for (int i = InString.size()-1; i >= 0; i--)
+		{
+			result += std::stod(InString[i]) * pow(10, InString.size() - i - 1);
+		}
+	}
+	else
+	{
+		for(int i=indexPoint-1;i>=0;i--)
+			result += std::stod(InString[i]) * pow(10, indexPoint - 1 - i );
+		for (int i = indexPoint + 1; i < InString.size(); i++)
+		{
+			cout << std::stod(InString[i]) << endl;
+			result += std::stod(InString[i]) * pow(10, int(indexPoint) - i);
+		}
+	}
+	return result;
+}
+
+OperatorSet::OperatorSet()
+{
+
+}
+
+
+double ComputeArithmeticExpression(std::string ArithmeticExpression)
+{
+	set<string> SymbolSet;
+	SymbolSet.insert("+");
+	SymbolSet.insert("-");
+	SymbolSet.insert("*");
+	SymbolSet.insert("/");
+	SymbolSet.insert("sqrt");
+
+	stack<double> OperatorNumber;
+	stack<string> Operator;
+
+	size_t indexStringIndex = 0;
+	double currentValue;
+
+	while (indexStringIndex < ArithmeticExpression.size())
+	{
+		//string tmp = string(1, ArithmeticExpression[indexStringIndex]);
+		//if (tmp == " " || tmp == "(")
+		//{
+		//	indexStringIndex++;
+		//	continue;
+		//}
+		//else if (SymbolSet.count(tmp)  || tmp=="s")
+		//{
+		//	Operator.push(tmp);
+		//}
+		//else if (tmp == ")")
+		//{
+		//	string op = Operator.top();
+		//	Operator.pop();
+		//	double preValue = OperatorNumber.top();
+		//	OperatorNumber.pop();
+		//	double tmpValue;
+
+		//	if (op == "+")
+		//	{
+		//		tmpValue = preValue + currentValue;
+		//		OperatorNumber.push(tmpValue);
+		//	}
+		//	else if(op=="-")
+		//	{
+		//		tmpValue = preValue - currentValue;
+		//		OperatorNumber.push(tmpValue);
+		//	}
+		//	else if (op=="*")
+		//	{
+		//		tmpValue = preValue * currentValue;
+		//		OperatorNumber.push(tmpValue);
+		//	}
+		//	else if(op=="/")
+		//	{
+		//		tmpValue = preValue / currentValue;
+		//		OperatorNumber.push(tmpValue);
+		//	}
+		//	else if(op=="s")
+		//	{
+		//		string StringSqrt = string(1, ArithmeticExpression[indexStringIndex]) +
+		//			string(1, ArithmeticExpression[indexStringIndex + 1]) +
+		//			string(1, ArithmeticExpression[indexStringIndex + 2]) +
+		//			string(1, ArithmeticExpression[indexStringIndex+3]);
+		//		if(StringSqrt=="sqrt")
+		//		tmpValue = sqrt(currentValue);
+		//		OperatorNumber.push(tmpValue);
+		//	}
+		//	else if()
+		//}
+		//
+		//	
+		
+
+
+
+
+	return 0.0;
 }
