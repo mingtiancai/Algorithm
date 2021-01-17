@@ -98,6 +98,21 @@ void testEqualKey()
 	}
 }
 
+void testComprimeArrayIndex()
+{
+	bool testData[4][4];
+
+	ComprimeArrayIndex((bool*)testData, 4, 4);
+
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			cout << testData[i][j] << "   ";
+		}
+		cout << endl;
+	}
+}
 
 
 
@@ -111,5 +126,6 @@ void test()
 	//testComputePowBase2();
 	//testLessMaxIntegerLog2();
 	//testRecurveComputeIn();
-	testEqualKey();
+	//testEqualKey();
+	testComprimeArrayIndex();
 }

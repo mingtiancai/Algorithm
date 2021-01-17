@@ -123,3 +123,16 @@ double RecurveComputeIn(unsigned int N)
 		return log(N) + RecurveComputeIn(N - 1);
 }
 
+void ComprimeArrayIndex(bool* Indata, size_t Width, size_t Height)
+{
+	for (int i = 0; i < Height; i++)
+	{
+		for (int j = 0; j < Width; j++)
+		{
+			if (i * j == 0 || Gcd(i, j) == 1)
+				*(Indata + i * Width + j) = true;
+			else
+				*(Indata + i * Width + j) = false;
+		}
+	}
+}
