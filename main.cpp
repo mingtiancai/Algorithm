@@ -14,8 +14,9 @@ int main()
 	cout << "begin\n";
 	test();
 	cout << endl;
+	cout << endl;
 
 
 
-	return 0;
+	retsurn 0;
 }

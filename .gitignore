@@ -8,3 +8,4 @@
 *.vcxproj
 /Algorithm.vcxproj.filters
 /Algorithm.vcxproj.user
+/Debug
