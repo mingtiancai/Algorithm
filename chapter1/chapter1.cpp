@@ -242,10 +242,7 @@ double ComputeArithmeticExpression(std::string ArithmeticExpression)
 		//		OperatorNumber.push(tmpValue);
 		//	}
 		//	else if()
-		//}
-		//
-		//	
-		
+		}
 
 
 

@@ -1,2 +1,0 @@
-D:\projects\introAlgorithm\Algorithm\Debug\Algorithm.exe
-D:\projects\introAlgorithm\Algorithm\Debug\Algorithm.pdb

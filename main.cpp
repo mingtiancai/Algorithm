@@ -12,7 +12,7 @@ using namespace std;
 int main()
 {
 	cout << "begin\n";
-	test();
+	//test();
 	cout << endl;
 	cout << endl;
 
