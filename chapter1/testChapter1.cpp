@@ -136,10 +136,18 @@ void testComputeArithmeticExpression()
 	cout << result<<endl;
 	result = ComputeArithmeticExpression(expression3);
 	cout << result << endl;
-
-
 }
 
+void testParentheses()
+{
+	string test1 = "[[[]]]{}()";
+	string test2 = "{ss}";
+	string test3 = "{(}";
+
+	cout << Parentheses(test1) << endl;
+	cout << Parentheses(test2) << endl;
+	cout << Parentheses(test3) << endl;
+}
 
 
 
@@ -157,6 +165,7 @@ void test()
 	//testEqualKey();
 	//testComprimeArrayIndex();
 	//testStringParseToDouble();
-	testComputeArithmeticExpression();
+	//testComputeArithmeticExpression();
+	testParentheses();
 
 }

@@ -122,12 +122,13 @@ std::pair<int, int> EqualKey(const std::vector<T>& Indata, T TargetNum)
 	return std::make_pair(lessNumber, count);
 }
 
-//1.1.30
+//1.1.30 solution
 void ComprimeArrayIndex(bool* Indata,size_t Width,size_t Height);
 
 double ComputeArithmeticExpression(std::string ArithmeticExpression);
 
-
+//1.3.4 solution
+bool Parentheses(std::string Indata);
 
 
 //≤‚ ‘
@@ -151,3 +152,4 @@ void testStringParseToDouble();
 
 void testComputeArithmeticExpression();
 
+void testParentheses();

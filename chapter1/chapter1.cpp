@@ -345,7 +345,55 @@ double ComputeArithmeticExpression(std::string ArithmeticExpression)
 
 			//cerr << "please input right expression" << endl;
 		}
-
 	}
 	return result;
+}
+
+bool Parentheses(std::string Indata)
+{
+	set<string> SymbolSetRight;
+	SymbolSetRight.insert(")");
+	SymbolSetRight.insert("]");
+	SymbolSetRight.insert("}");
+
+	set<string> SymbolSetLeft;
+	SymbolSetLeft.insert("(");
+	SymbolSetLeft.insert("[");
+	SymbolSetLeft.insert("{");
+
+	map<string, string> m;
+	m.insert(pair<string,string>(")", "("));
+	m.insert(pair < string, string>("]", "["));
+	m.insert(pair < string, string>("}", "{"));
+
+	stack<string> SymbolStack;
+
+	for (size_t i = 0; i < Indata.size(); i++)
+	{
+		string tmp = string(1, Indata[i]);
+
+		if (SymbolSetLeft.count(tmp))
+		{
+			SymbolStack.push(tmp);
+			continue;
+		}
+
+		else if(SymbolSetRight.count(tmp))
+		{
+			if (SymbolStack.top() == m[tmp])
+			{
+				SymbolStack.pop();
+				continue;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
+	}
+	return true;
 }
