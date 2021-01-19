@@ -163,89 +163,189 @@ double StringParseToDouble(std::vector<string> InString)
 			result += std::stod(InString[i]) * pow(10, indexPoint - 1 - i );
 		for (int i = indexPoint + 1; i < InString.size(); i++)
 		{
-			cout << std::stod(InString[i]) << endl;
+			//cout << std::stod(InString[i]) << endl;
 			result += std::stod(InString[i]) * pow(10, int(indexPoint) - i);
 		}
 	}
 	return result;
 }
 
-OperatorSet::OperatorSet()
+OperatorSet::OperatorSet(const std::vector<std::string>& operatorVector)
 {
+	for (auto x : operatorVector)
+	{
+		OperatorMap.insert(pair<string, size_t>(x, x.size()));
+		if (x.size() > maxOperatorName)
+			maxOperatorName = x.size();
+	}
+}
 
+size_t OperatorSet::getMaxOperatorNameLength()
+{
+	return maxOperatorName;
+}
+
+bool OperatorSet::haveItem(std::string item)
+{
+	if (OperatorMap.count(item))
+		return true;
+	else
+		return false;
+}
+
+std::string removeSpacing(std::string Indata)
+{
+	string result;
+	for (size_t i = 0; i < Indata.size(); i++)
+	{
+		string tmp = string(1, Indata[i]);
+		if (tmp != " ")
+			result += tmp;
+	}
+	return result;
 }
 
 
 double ComputeArithmeticExpression(std::string ArithmeticExpression)
 {
-	set<string> SymbolSet;
-	SymbolSet.insert("+");
-	SymbolSet.insert("-");
-	SymbolSet.insert("*");
-	SymbolSet.insert("/");
-	SymbolSet.insert("sqrt");
+	//初始化支持的算术运算
+	vector<string> OperatorVector;
+	OperatorVector.push_back("+");
+	OperatorVector.push_back("-");
+	OperatorVector.push_back("*");
+	OperatorVector.push_back("/");
+	OperatorVector.push_back("sqrt");
+	OperatorVector.push_back("cos");
 
-	stack<double> OperatorNumber;
-	stack<string> Operator;
+	set<string> NumberAndPointSet;
+	NumberAndPointSet.insert("0");
+	NumberAndPointSet.insert("1");
+	NumberAndPointSet.insert("2");
+	NumberAndPointSet.insert("3");
+	NumberAndPointSet.insert("4");
+	NumberAndPointSet.insert("5");
+	NumberAndPointSet.insert("6");
+	NumberAndPointSet.insert("7");
+	NumberAndPointSet.insert("8");
+	NumberAndPointSet.insert("9");
+	NumberAndPointSet.insert(".");
 
-	size_t indexStringIndex = 0;
-	double currentValue;
+	OperatorSet OperatorSetIns(OperatorVector);
 
-	while (indexStringIndex < ArithmeticExpression.size())
+	size_t indexRemovedArithmeticExpression = 0;
+	double result=0.0;
+
+	stack<double> numberStack;
+	stack<string> operatorStack;
+	double currentValue=0.0;
+
+	string removedArithmeticExpression = removeSpacing(ArithmeticExpression);
+
+	while (indexRemovedArithmeticExpression < removedArithmeticExpression.size())
 	{
-		//string tmp = string(1, ArithmeticExpression[indexStringIndex]);
-		//if (tmp == " " || tmp == "(")
-		//{
-		//	indexStringIndex++;
-		//	continue;
-		//}
-		//else if (SymbolSet.count(tmp)  || tmp=="s")
-		//{
-		//	Operator.push(tmp);
-		//}
-		//else if (tmp == ")")
-		//{
-		//	string op = Operator.top();
-		//	Operator.pop();
-		//	double preValue = OperatorNumber.top();
-		//	OperatorNumber.pop();
-		//	double tmpValue;
+		string tmp = string(1, removedArithmeticExpression[indexRemovedArithmeticExpression]);
+		if (NumberAndPointSet.count(tmp))
+		{
+			vector<string> numberVector;
+			numberVector.push_back(tmp);
+			indexRemovedArithmeticExpression++;
+			string numstr = string(1, removedArithmeticExpression[indexRemovedArithmeticExpression]);
+			while (NumberAndPointSet.count(numstr))
+			{
+				numberVector.push_back(numstr);
+				indexRemovedArithmeticExpression++;
+				numstr = string(1, removedArithmeticExpression[indexRemovedArithmeticExpression]);
+			}
 
-		//	if (op == "+")
-		//	{
-		//		tmpValue = preValue + currentValue;
-		//		OperatorNumber.push(tmpValue);
-		//	}
-		//	else if(op=="-")
-		//	{
-		//		tmpValue = preValue - currentValue;
-		//		OperatorNumber.push(tmpValue);
-		//	}
-		//	else if (op=="*")
-		//	{
-		//		tmpValue = preValue * currentValue;
-		//		OperatorNumber.push(tmpValue);
-		//	}
-		//	else if(op=="/")
-		//	{
-		//		tmpValue = preValue / currentValue;
-		//		OperatorNumber.push(tmpValue);
-		//	}
-		//	else if(op=="s")
-		//	{
-		//		string StringSqrt = string(1, ArithmeticExpression[indexStringIndex]) +
-		//			string(1, ArithmeticExpression[indexStringIndex + 1]) +
-		//			string(1, ArithmeticExpression[indexStringIndex + 2]) +
-		//			string(1, ArithmeticExpression[indexStringIndex+3]);
-		//		if(StringSqrt=="sqrt")
-		//		tmpValue = sqrt(currentValue);
-		//		OperatorNumber.push(tmpValue);
-		//	}
-		//	else if()
+			double tmpNumber = StringParseToDouble(numberVector);
+			if (numstr == ")")
+			{
+				currentValue = tmpNumber;
+			}
+			else
+			{
+				numberStack.push(tmpNumber);
+			}
+		}
+		else if (tmp == ")")
+		{
+			if (operatorStack.empty())
+				return result;
+
+			string op = operatorStack.top();
+			operatorStack.pop();
+
+			if (op == "+")
+			{
+				double preValue = numberStack.top();
+				numberStack.pop();
+				result = preValue + currentValue;
+				numberStack.push(result);
+				indexRemovedArithmeticExpression++;
+			}
+			else if (op == "-")
+			{
+				double preValue = numberStack.top();
+				numberStack.pop();
+				result = preValue - currentValue;
+				numberStack.push(result);
+				indexRemovedArithmeticExpression++;
+			}
+			else if (op == "*")
+			{
+				double preValue = numberStack.top();
+				numberStack.pop();
+				result = preValue * currentValue;
+				numberStack.push(result);
+				indexRemovedArithmeticExpression++;
+			}
+			else if (op == "/")
+			{
+				double preValue = numberStack.top();
+				numberStack.pop();
+				result = preValue / currentValue;
+				numberStack.push(result);
+				indexRemovedArithmeticExpression++;
+			}
+			else if (op == "sqrt")
+			{
+				result = sqrt(currentValue);
+				numberStack.push(currentValue);
+				indexRemovedArithmeticExpression++;
+			}
+			else if (op == "cos")
+			{
+				result = cos(currentValue);
+				numberStack.push(currentValue);
+				indexRemovedArithmeticExpression++;
+			}
+		}
+		else if (tmp == "(")
+		{
+			indexRemovedArithmeticExpression++;
+			continue;
+		}
+		else
+		{
+			string tmpString = "";
+
+			bool flagFoundOperator = false;
+			for (size_t i = 0; i < OperatorSetIns.getMaxOperatorNameLength(); i++)
+			{
+				tmpString += string(1, removedArithmeticExpression[indexRemovedArithmeticExpression+i]);
+
+				if (OperatorSetIns.haveItem(tmpString))
+				{
+					operatorStack.push(tmpString);
+					indexRemovedArithmeticExpression += i;
+					indexRemovedArithmeticExpression++;
+					break;
+				}
+			}
+
+			//cerr << "please input right expression" << endl;
 		}
 
-
-
-
-	return 0.0;
+	}
+	return result;
 }

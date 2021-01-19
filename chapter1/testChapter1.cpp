@@ -1,6 +1,5 @@
 #include "chapter1.h"
 
-
 using namespace std;
 
 void testGcd()
@@ -125,6 +124,22 @@ void testStringParseToDouble()
 	cout << r << endl;
 }
 
+void testComputeArithmeticExpression()
+{
+	string expression1 = "(sqrt(2))";
+	string expression2 = " ( (100+10)-11)";
+	string expression3 = " ( cos(3.1415926/3))";
+	double result;
+	result = ComputeArithmeticExpression(expression1);
+	cout << result << endl;
+	result=ComputeArithmeticExpression(expression2);
+	cout << result<<endl;
+	result = ComputeArithmeticExpression(expression3);
+	cout << result << endl;
+
+
+}
+
 
 
 
@@ -141,7 +156,7 @@ void test()
 	//testRecurveComputeIn();
 	//testEqualKey();
 	//testComprimeArrayIndex();
-	testStringParseToDouble();
-
+	//testStringParseToDouble();
+	testComputeArithmeticExpression();
 
 }

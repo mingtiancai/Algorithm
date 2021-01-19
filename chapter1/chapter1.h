@@ -7,10 +7,15 @@ double StringParseToDouble(std::vector<std::string> InString);
 
 class OperatorSet {
 public:
-	OperatorSet();
+	OperatorSet(const std::vector<std::string>& operatorVector);
+	size_t getMaxOperatorNameLength();
+	bool haveItem(std::string item);
 private:
-
+	size_t maxOperatorName=0;
+	std::map<std::string, size_t> OperatorMap;
 };
+
+std::string removeSpacing(std::string Indata);
 
 //Ëã·¨
 
@@ -143,4 +148,6 @@ void testRecurveComputeIn();
 void testEqualKey();
 
 void testStringParseToDouble();
+
+void testComputeArithmeticExpression();
 
