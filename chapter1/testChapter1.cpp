@@ -182,6 +182,15 @@ void testComplementArithmeticExpression()
 	cout << result << endl;
 }
 
+void testInfixToPostfix()
+{
+	string test1 = "((2*3)/(2-1)+(3*(4-1)))";
+	//string test1 = "((1+2)*((3-4)*(5-6)))";
+	cout << InfixToPostfix(test1) << endl;
+
+
+}
+
 
 
 
@@ -201,8 +210,8 @@ void test()
 	//testParentheses();
 	//testmultiCountTransfer();
 	//testoneCountTransfer();
-	testComplementArithmeticExpression();
-
+	//testComplementArithmeticExpression();
+	testInfixToPostfix();
 
 
 

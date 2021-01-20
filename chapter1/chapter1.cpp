@@ -163,7 +163,6 @@ double StringParseToDouble(std::vector<string> InString)
 			result += std::stod(InString[i]) * pow(10, indexPoint - 1 - i );
 		for (int i = indexPoint + 1; i < InString.size(); i++)
 		{
-			//cout << std::stod(InString[i]) << endl;
 			result += std::stod(InString[i]) * pow(10, int(indexPoint) - i);
 		}
 	}
@@ -557,4 +556,106 @@ string ComplementArithmeticExpression(string ArithmeticExpression)
 	}
 
 	return result;
+}
+
+std::string InfixToPostfix(std::string Indata)
+{
+	stack<string> operatorNumberString;
+	stack<string> operatorString;
+	
+	string removedSpacingIndata = removeSpacing(Indata);
+
+	set<string> NumberAndPointSet;
+	NumberAndPointSet.insert("0");
+	NumberAndPointSet.insert("1");
+	NumberAndPointSet.insert("2");
+	NumberAndPointSet.insert("3");
+	NumberAndPointSet.insert("4");
+	NumberAndPointSet.insert("5");
+	NumberAndPointSet.insert("6");
+	NumberAndPointSet.insert("7");
+	NumberAndPointSet.insert("8");
+	NumberAndPointSet.insert("9");
+	NumberAndPointSet.insert(".");
+
+	set<string> SymbolSet;
+	SymbolSet.insert("+");
+	SymbolSet.insert("-");
+	SymbolSet.insert("*");
+	SymbolSet.insert("/");
+
+	size_t index = 0;
+
+	string result;
+
+	while (index < removedSpacingIndata.size())
+	{
+		if (string(1, removedSpacingIndata[index]) == "(")
+		{
+			size_t beginIndex = index;
+			index++;
+			string tmp;
+
+			int count = 1;
+
+			while (count > 0)
+			{
+				if (string(1, removedSpacingIndata[index]) == ")")
+				{
+					count--;
+					index++;
+				}
+				else if (string(1, removedSpacingIndata[index]) == "(")
+				{
+					count++;
+					index++;
+				}
+				else
+					index++;
+			}
+			
+			tmp = removedSpacingIndata.substr(beginIndex+1, index-2-beginIndex );
+			string r= InfixToPostfix(tmp);
+
+			if (operatorNumberString.empty())
+				operatorNumberString.push(r);
+			else
+			{
+				string p= operatorNumberString.top() + r + operatorString.top();
+				operatorNumberString.pop();
+				operatorString.pop();
+				operatorNumberString.push(p);
+			}
+		}
+		else if(NumberAndPointSet.count(string(1, removedSpacingIndata[index])))
+		{
+			string tmpResult;
+			string tmp = string(1, removedSpacingIndata[index]);
+
+			while (NumberAndPointSet.count(tmp))
+			{
+				tmpResult += tmp;
+				index++;
+				tmp = string(1, removedSpacingIndata[index]);
+			}
+			
+			if (operatorNumberString.empty())
+				operatorNumberString.push(tmpResult);
+			else
+			{
+				string r = operatorNumberString.top() + tmpResult + operatorString.top();;
+				operatorNumberString.pop();
+				operatorString.pop();
+				operatorNumberString.push(r);
+			}
+		}
+
+		else
+		{
+			operatorString.push(string(1, removedSpacingIndata[index]));
+			index++;
+		}
+	}
+
+	return operatorNumberString.top();
 }

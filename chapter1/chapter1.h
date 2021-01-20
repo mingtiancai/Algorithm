@@ -137,6 +137,9 @@ bool Parentheses(std::string Indata);
 //1.3.9 solution
 std::string ComplementArithmeticExpression(std::string ArithmeticExpression);
 
+//1.3.10 solution
+std::string InfixToPostfix(std::string Indata);
+
 
 //≤‚ ‘
 void test();
@@ -166,3 +169,5 @@ void testmultiCountTransfer();
 void testoneCountTransfer();
 
 void testComplementArithmeticExpression();
+
+void testInfixToPostfix();
