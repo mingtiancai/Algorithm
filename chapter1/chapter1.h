@@ -17,6 +17,10 @@ private:
 
 std::string removeSpacing(std::string Indata);
 
+std::string oneCountTransfer(std::string Indata,size_t index);
+
+std::string multiCountTransfer(std::string Indata, int recount,size_t index);
+
 //算法
 
 //计算两个数最大公约数
@@ -130,6 +134,9 @@ double ComputeArithmeticExpression(std::string ArithmeticExpression);
 //1.3.4 solution
 bool Parentheses(std::string Indata);
 
+//1.3.9 solution
+std::string ComplementArithmeticExpression(std::string ArithmeticExpression);
+
 
 //测试
 void test();
@@ -153,3 +160,9 @@ void testStringParseToDouble();
 void testComputeArithmeticExpression();
 
 void testParentheses();
+
+void testmultiCountTransfer();
+
+void testoneCountTransfer();
+
+void testComplementArithmeticExpression();

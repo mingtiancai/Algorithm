@@ -397,3 +397,164 @@ bool Parentheses(std::string Indata)
 	}
 	return true;
 }
+
+std::string oneCountTransfer(std::string Indata, size_t index)
+{
+	set<string> NumberAndPointSet;
+	NumberAndPointSet.insert("0");
+	NumberAndPointSet.insert("1");
+	NumberAndPointSet.insert("2");
+	NumberAndPointSet.insert("3");
+	NumberAndPointSet.insert("4");
+	NumberAndPointSet.insert("5");
+	NumberAndPointSet.insert("6");
+	NumberAndPointSet.insert("7");
+	NumberAndPointSet.insert("8");
+	NumberAndPointSet.insert("9");
+	NumberAndPointSet.insert(".");
+
+	set<string> SymbolSet;
+	SymbolSet.insert("+");
+	SymbolSet.insert("-");
+	SymbolSet.insert("*");
+	SymbolSet.insert("/");
+
+	bool down1 = false;
+	bool up1 = false;
+	bool up2 = false;
+
+	int i = index;
+	while (i>=0)
+	{
+		string tmp = string(1, Indata[i]);
+		if (tmp == ")")
+		{
+			i--;
+			continue;
+		}
+
+		if (NumberAndPointSet.count(tmp))
+		{
+			i--;
+			continue;
+		}
+
+		else if (SymbolSet.count(tmp))
+		{
+			break;
+		}
+		else
+		{
+			cerr << "please check the input expression\n";
+		}
+	}
+
+	if(SymbolSet.count(string(1, Indata[i])))
+		i--;
+	else
+	{
+		cerr << "please check the input expression\n";
+	}
+
+
+	while (i >= 0)
+	{
+		string tmp = string(1, Indata[i]);
+		if (tmp == ")")
+		{
+			i--;
+			continue;
+		}
+
+		if (NumberAndPointSet.count(tmp))
+		{
+			i--;
+			continue;
+		}
+
+		else if (SymbolSet.count(tmp))
+		{
+			break;
+		}
+		else
+		{
+			cerr << "please check the input expression\n";
+		}
+	}
+
+	return Indata.substr(0, i + 1) + "(" + Indata.substr(i + 1, Indata.size());
+}
+
+std::string multiCountTransfer(std::string Indata, int recount, size_t index)
+{
+	size_t targetIndex;
+	int i = index;
+	assert(recount > 1);
+	while (recount > 0 && i>=0)
+	{
+		if (string(1, Indata[i]) == "(")
+		{
+			recount--;
+			targetIndex = i;
+			i--;
+		}
+		i--;
+	}
+
+	return Indata.substr(0, targetIndex) + "(" + Indata.substr(targetIndex, Indata.size() );
+}
+
+string ComplementArithmeticExpression(string ArithmeticExpression)
+{
+	string remoevedArithmeticExpression = removeSpacing(ArithmeticExpression);
+	string result= remoevedArithmeticExpression;
+	size_t index = 0;
+	int recount = 1;
+
+	map<size_t, int> m;
+
+	while (index < remoevedArithmeticExpression.size())
+	{
+		string tmp = string(1, remoevedArithmeticExpression[index]);
+		if (index < remoevedArithmeticExpression.size() - 1)
+		{
+			if (tmp == ")")
+			{
+				m.insert(pair<size_t, int>(index, recount));
+				if (string(1, remoevedArithmeticExpression[index + 1]) == ")")
+				{
+					m.insert(pair<size_t, int>(index, recount));
+					recount++;
+					index++;
+				}
+				else
+				{
+					recount = 1;
+					index++;
+				}
+			}
+			else
+				index++;
+		}
+		else
+		{
+			m.insert(pair<size_t, int>(index, recount));
+			index++;
+		}	
+	}
+
+	size_t offset = 0;
+	for (size_t i = 0; i < remoevedArithmeticExpression.size(); i++)
+	{
+		if (m.count(i))
+		{
+			if (m[i] == 1)
+				result = oneCountTransfer(result, i + offset);
+			else
+				result = multiCountTransfer(result, m[i], i + offset);
+			offset++;
+		}
+	}
+
+	return result;
+}

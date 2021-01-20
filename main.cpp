@@ -13,7 +13,9 @@ int main()
 {
 	cout << "begin\n";
 	test();
-
+	/*string s = "123456";
+	int i = 3;
+	cout << s.substr(0, i) << endl;*/
 	
 
 	

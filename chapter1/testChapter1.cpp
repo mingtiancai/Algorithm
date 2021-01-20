@@ -149,6 +149,38 @@ void testParentheses()
 	cout << Parentheses(test3) << endl;
 }
 
+void testoneCountTransfer()
+{
+	string testString1 = "3+4)";
+	cout << oneCountTransfer(testString1,3) << endl;
+
+	string testString2 = "(4+5)*3+4))";
+	testString2 = oneCountTransfer(testString2, 9);
+	cout << testString2 << endl;
+	cout << multiCountTransfer(testString2,2,11) << endl;
+}
+
+void testmultiCountTransfer()
+{
+	string testString = "(3-4)*(5-6))";
+	cout << multiCountTransfer(testString, 2, 11);
+}
+
+void testComplementArithmeticExpression()
+{
+	string result;
+	string testString1 = "1+2)*3-4)*5-6)))";
+	result = ComplementArithmeticExpression(testString1);
+	cout << result << endl;
+
+	string testString2 = "1+2)";
+	result = ComplementArithmeticExpression(testString2);
+	cout << result << endl;
+
+	string testString3 = "1+2)+4+3))";
+	result = ComplementArithmeticExpression(testString3);
+	cout << result << endl;
+}
 
 
 
@@ -166,6 +198,12 @@ void test()
 	//testComprimeArrayIndex();
 	//testStringParseToDouble();
 	//testComputeArithmeticExpression();
-	testParentheses();
+	//testParentheses();
+	//testmultiCountTransfer();
+	//testoneCountTransfer();
+	testComplementArithmeticExpression();
+
+
+
 
 }
