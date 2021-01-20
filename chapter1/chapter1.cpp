@@ -659,3 +659,47 @@ std::string InfixToPostfix(std::string Indata)
 
 	return operatorNumberString.top();
 }
+
+double ComputePostfix(std::vector<std::string> PostfixExpression, std::vector<bool> flagOperatorVector)
+{
+	//std::vector<bool> flagOperatorVector
+	//true is operator
+	//false is number string
+
+	stack<double> numberStack;
+	
+	size_t index = 0;
+
+	while (index < PostfixExpression.size())
+	{
+		if (flagOperatorVector[index] == true)
+		{
+			double postValue = numberStack.top();
+			numberStack.pop();
+			double preValue = numberStack.top();
+			numberStack.pop();
+			double tmp;
+
+			if (PostfixExpression[index] == "+")
+				tmp = preValue + postValue;
+			else if(PostfixExpression[index] == "-")
+				tmp = preValue - postValue;
+			else if (PostfixExpression[index] == "*")
+				tmp = preValue * postValue;
+			else if (PostfixExpression[index] == "/")
+				tmp = preValue / postValue;
+			numberStack.push(tmp);
+			index++;
+		}
+		else
+		{
+			vector<string> v;
+			v.push_back(PostfixExpression[index]);
+			double value = StringParseToDouble(v);
+			numberStack.push(value);
+			index++;
+		}
+	}
+
+	return numberStack.top();
+}

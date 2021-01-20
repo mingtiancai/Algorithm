@@ -140,6 +140,10 @@ std::string ComplementArithmeticExpression(std::string ArithmeticExpression);
 //1.3.10 solution
 std::string InfixToPostfix(std::string Indata);
 
+//1.3.11 solution
+double ComputePostfix(std::vector<std::string> PostfixExpression, std::vector<bool> flagOperatorVector);
+
+
 
 //≤‚ ‘
 void test();
@@ -171,3 +175,5 @@ void testoneCountTransfer();
 void testComplementArithmeticExpression();
 
 void testInfixToPostfix();
+
+void testComputePostfix();

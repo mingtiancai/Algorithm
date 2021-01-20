@@ -187,11 +187,19 @@ void testInfixToPostfix()
 	string test1 = "((2*3)/(2-1)+(3*(4-1)))";
 	//string test1 = "((1+2)*((3-4)*(5-6)))";
 	cout << InfixToPostfix(test1) << endl;
-
-
 }
 
+void testComputePostfix()
+{
+	vector<string> expressionVector = { "3","4","+","5","*","6","-" };
 
+	vector<bool> flag = { false,false,true,false,true,false,true };
+
+	double result;
+	result = ComputePostfix(expressionVector, flag);
+	cout << result << endl;
+
+}
 
 
 
@@ -211,8 +219,6 @@ void test()
 	//testmultiCountTransfer();
 	//testoneCountTransfer();
 	//testComplementArithmeticExpression();
-	testInfixToPostfix();
-
-
-
+	//testInfixToPostfix();
+	testComputePostfix();
 }
