@@ -10,3 +10,5 @@
 #include <tuple>
 #include <map>
 #include <queue>
+#include <memory>
+#include <exception>

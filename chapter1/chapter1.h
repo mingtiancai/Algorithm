@@ -143,6 +143,98 @@ std::string InfixToPostfix(std::string Indata);
 //1.3.11 solution
 double ComputePostfix(std::vector<std::string> PostfixExpression, std::vector<bool> flagOperatorVector);
 
+//1.3.14 solution
+template<typename T>
+class ResizeingArrayQueue
+{
+public:
+	ResizeingArrayQueue()
+	{
+		capacity = 1;
+		arrayPtr = new T[capacity];
+	}
+
+	T dequeue()
+	{
+		if (isEmpty())
+		{
+			std::cerr << "the queue is empty\n";
+		}
+		else
+		{
+			T tmp = arrayPtr[beginIndex];
+			beginIndex = (beginIndex+1) % capacity ;
+			sizeQueue--;
+			return tmp;
+		}
+	}
+
+	void enqueue(T newdata)
+	{
+		if (sizeQueue == capacity)
+			resize2();
+
+		arrayPtr[endIndex] = newdata;
+		endIndex = (endIndex+1) % capacity;
+		sizeQueue++;
+	}
+
+	size_t size()
+	{
+		return sizeQueue;
+	}
+
+	bool isEmpty()
+	{
+		if (sizeQueue == 0)
+			return true;
+		else
+			return false;
+	}
+
+	~ResizeingArrayQueue()
+	{
+		delete []arrayPtr;
+	}
+
+private:
+	ResizeingArrayQueue(const ResizeingArrayQueue& in) = delete;
+	ResizeingArrayQueue& operator=(const ResizeingArrayQueue& p) = delete;
+
+	void resize2()
+	{
+		//备份原数组
+		T* tmpArray=new T[sizeQueue];
+
+		for (int i = 0; i < sizeQueue; i++)
+		{
+			size_t tmpIndex = (beginIndex + i) % capacity;
+			tmpArray[i] = arrayPtr[tmpIndex];
+		}
+
+		delete[]arrayPtr;
+
+		capacity = capacity * 2;
+		arrayPtr = new T[capacity];
+
+		//赋值新的空间元素
+
+		for (int i = 0; i < sizeQueue; i++)
+		{
+			arrayPtr[i] = tmpArray[i];
+		}
+
+		beginIndex = 0;
+		endIndex = sizeQueue;
+		delete[]tmpArray;
+	}
+	size_t capacity = 0;
+	size_t beginIndex=0;
+	size_t endIndex=0;
+	size_t sizeQueue = 0;
+	T* arrayPtr = nullptr;
+};
+
 
 
 //测试
@@ -177,3 +269,5 @@ void testComplementArithmeticExpression();
 void testInfixToPostfix();
 
 void testComputePostfix();
+
+void testResizeingArrayQueue();

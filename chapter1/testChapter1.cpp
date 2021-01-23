@@ -198,7 +198,27 @@ void testComputePostfix()
 	double result;
 	result = ComputePostfix(expressionVector, flag);
 	cout << result << endl;
+}
 
+void testResizeingArrayQueue()
+{
+	ResizeingArrayQueue<int> queueL;
+
+	
+	queueL.enqueue(4);
+	cout << queueL.size() << endl;
+	cout << queueL.dequeue() << endl;
+	cout << queueL.size() << endl;
+
+	queueL.enqueue(4);
+	cout << queueL.size() << endl;
+	queueL.enqueue(5);
+	cout << queueL.size() << endl;
+	queueL.enqueue(6);
+	cout << queueL.size() << endl;
+
+	while (!queueL.isEmpty())
+		cout << queueL.dequeue() << endl;
 }
 
 
@@ -220,5 +240,6 @@ void test()
 	//testoneCountTransfer();
 	//testComplementArithmeticExpression();
 	//testInfixToPostfix();
-	testComputePostfix();
+	//testComputePostfix();
+	testResizeingArrayQueue();
 }
