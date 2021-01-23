@@ -235,6 +235,123 @@ private:
 	T* arrayPtr = nullptr;
 };
 
+template <typename T>
+class LinkList
+{
+	
+public:
+	LinkList()
+	{
+		firstPtr = nullptr;
+		lastPtr = nullptr;
+		sizeLinkList = 0;
+	}
+
+	void addNode(T NewItem)
+	{
+		if (sizeLinkList == 0)
+		{
+			firstPtr = new Node;
+			lastPtr = firstPtr;
+			firstPtr->item = NewItem;
+			firstPtr->next = nullptr;
+			sizeLinkList++;
+		}
+		else
+		{
+			Node* tmp = lastPtr;
+			lastPtr = new Node;
+			lastPtr->next = nullptr;
+			lastPtr->item = NewItem;
+			tmp->next = lastPtr;
+			sizeLinkList++;
+		}
+	}
+
+	void removeLast()
+	{
+		if (sizeLinkList == 0)
+			assert(!isEmpty());
+		else if (sizeLinkList == 1)
+		{
+			delete firstPtr;
+			firstPtr = nullptr;
+			lastPtr = nullptr;
+			sizeLinkList--;
+		}
+		else
+		{
+			Node* tmp = firstPtr;
+			while (tmp->next != lastPtr)
+			{
+				tmp = tmp->next;
+			}
+
+			delete lastPtr;
+			lastPtr = tmp;
+			sizeLinkList--;
+		}
+	}
+
+	T getFirstItem()
+	{
+		if (isEmpty())
+			assert(!isEmpty());
+		else
+		{
+			return firstPtr->item;
+		}
+	}
+
+	T getLastItem()
+	{
+		if (isEmpty())
+			assert(!isEmpty());
+		else
+		{
+			return lastPtr->item;
+		}
+	}
+
+	bool isEmpty()
+	{
+		if (sizeLinkList == 0)
+			return true;
+		else
+			return false;
+	}
+
+	~LinkList()
+	{
+		while (!(firstPtr->next == nullptr))
+		{
+			Node* tmp = firstPtr;
+			firstPtr = tmp->next;
+			delete tmp;
+			sizeLinkList--;
+		}
+
+		if (sizeLinkList == 0)
+		{
+			firstPtr = nullptr;
+			lastPtr = nullptr;
+		}
+		else
+			delete firstPtr;
+		
+	}
+
+private:
+	struct Node
+	{
+		T item;
+		Node* next;
+	};
+	Node* firstPtr;
+	Node* lastPtr;
+	size_t sizeLinkList;
+};
+
 
 
 //≤‚ ‘
@@ -271,3 +388,5 @@ void testInfixToPostfix();
 void testComputePostfix();
 
 void testResizeingArrayQueue();
+
+void testLinkList();

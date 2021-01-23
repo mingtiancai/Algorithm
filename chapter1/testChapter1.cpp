@@ -221,6 +221,22 @@ void testResizeingArrayQueue()
 		cout << queueL.dequeue() << endl;
 }
 
+void testLinkList()
+{
+	LinkList<int> l;
+	l.addNode(10);
+	l.addNode(12);
+
+	cout << l.getFirstItem() << endl;
+	cout << l.getLastItem() << endl;
+
+	l.removeLast();
+
+	//cout << l.getFirstItem() << endl;
+	//cout << l.getLastItem() << endl;
+
+}
+
 
 
 void test()
@@ -241,5 +257,10 @@ void test()
 	//testComplementArithmeticExpression();
 	//testInfixToPostfix();
 	//testComputePostfix();
-	testResizeingArrayQueue();
+	//testResizeingArrayQueue();
+	testLinkList();
+
+
+
+
 }
