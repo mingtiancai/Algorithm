@@ -398,6 +398,43 @@ public:
 		}
 	}
 
+	void reverse()
+	{
+		assert(sizeLinkList > 0);
+
+		if (sizeLinkList == 1)
+		{
+
+		}
+		else
+		{
+			Node* tmp = firstPtr;
+			lastPtr = tmp;
+			Node* afterPtr = lastPtr;
+
+			while (firstPtr->next != nullptr)
+			{
+				tmp = firstPtr;
+				firstPtr = firstPtr->next;
+				tmp->next = afterPtr;
+				afterPtr = tmp;
+			}
+			lastPtr->next = nullptr;
+			firstPtr->next = afterPtr;
+		}
+	}
+
+	void printAllItems()
+	{
+		assert(sizeLinkList > 0);
+		Node* tmp = firstPtr;
+		for (int i = 0; i < sizeLinkList; i++)
+		{
+			std::cout << tmp->item << std::endl;
+			tmp = tmp->next;
+		}
+	}
+
 private:
 	struct Node
 	{
@@ -449,3 +486,5 @@ void testResizeingArrayQueue();
 void testLinkList();
 
 void testLinkListRemoveKrdItem();
+
+void testLinkListReverse();

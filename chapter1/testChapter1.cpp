@@ -254,6 +254,23 @@ void testLinkListRemoveKrdItem()
 	cout << l.getLastItem() << endl;
 }
 
+void testLinkListReverse()
+{
+	LinkList<int> l;
+
+	l.addNode(1);
+	l.addNode(2);
+	l.addNode(3);
+	l.addNode(4);
+	l.addNode(5);
+
+	l.printAllItems();
+
+	l.reverse();
+
+	l.printAllItems();
+}
+
 
 
 void test()
@@ -276,8 +293,8 @@ void test()
 	//testComputePostfix();
 	//testResizeingArrayQueue();
 	//testLinkList();
-	testLinkListRemoveKrdItem();
-
+	//testLinkListRemoveKrdItem();
+	testLinkListReverse();
 
 
 }
