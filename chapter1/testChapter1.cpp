@@ -234,7 +234,24 @@ void testLinkList()
 
 	//cout << l.getFirstItem() << endl;
 	//cout << l.getLastItem() << endl;
+}
 
+void testLinkListRemoveKrdItem()
+{
+	LinkList<int> l;
+
+	l.addNode(1);
+	l.addNode(2);
+	l.addNode(3);
+	l.addNode(4);
+	l.addNode(5);
+
+	cout << l.getFirstItem() << endl;
+	cout << l.getLastItem() << endl;
+	l.removeKrdItem(1);
+	cout << l.getFirstItem() << endl;
+	l.removeKrdItem(4) ;
+	cout << l.getLastItem() << endl;
 }
 
 
@@ -258,8 +275,8 @@ void test()
 	//testInfixToPostfix();
 	//testComputePostfix();
 	//testResizeingArrayQueue();
-	testLinkList();
-
+	//testLinkList();
+	testLinkListRemoveKrdItem();
 
 
 

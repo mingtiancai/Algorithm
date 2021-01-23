@@ -235,6 +235,9 @@ private:
 	T* arrayPtr = nullptr;
 };
 
+
+// 1.3.19 solution
+// 1.3.20 solution
 template <typename T>
 class LinkList
 {
@@ -338,7 +341,61 @@ public:
 		}
 		else
 			delete firstPtr;
-		
+	}
+
+	void removeKrdItem(int k)
+	{
+		assert(k >= 1 && k <= sizeLinkList);
+
+		if (k == 1 && sizeLinkList == 0)
+		{
+			std::cerr << "the list is empty!" << std::endl;
+		}
+		else if (k == 1 && sizeLinkList == 1)
+		{
+			sizeLinkList--;
+			delete firstPtr;
+
+			firstPtr = nullptr;
+			lastPtr = nullptr;
+		}
+		else if (k == sizeLinkList && k > 1)
+		{
+			Node* tmp=firstPtr;
+			for (int i = 0; i < sizeLinkList - 2; i++)
+			{
+				tmp = tmp->next;
+			}
+			delete lastPtr;
+			lastPtr->next = nullptr;
+			lastPtr = tmp;
+			sizeLinkList--;
+		}
+		else if (sizeLinkList > 1 && k == 1)
+		{
+			Node* tmp = firstPtr;
+			firstPtr = tmp->next;
+			delete tmp;
+			sizeLinkList--;
+		}
+		else
+		{
+			Node* tmp = firstPtr;
+
+			//先到达k-1处
+			for (int i = 0; i < k - 1; i++)
+			{
+				tmp = tmp->next;
+			}
+
+			Node* pre = tmp;
+			tmp = tmp->next;
+
+			pre->next = tmp->next;
+			sizeLinkList--;
+
+			delete tmp;
+		}
 	}
 
 private:
@@ -390,3 +447,5 @@ void testComputePostfix();
 void testResizeingArrayQueue();
 
 void testLinkList();
+
+void testLinkListRemoveKrdItem();
